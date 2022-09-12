@@ -1,1 +1,9 @@
-# cloudflare-purger-backend
+# 5sim activator
+
+##!important
+
+.env file
+
+```
+API_KEY=
+```
