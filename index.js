@@ -4,10 +4,8 @@ const bp = require('body-parser');
 const axios = require('axios');
 const PORT = 5004;
 const fs = require('fs');
-const open = require('open');
 
 const { join } = require('path');
-
 let counter = 0;
 let find = 0;
 let isCookieIn = false;
@@ -32,18 +30,21 @@ app.use(function (req, res, next) {
   next();
 });
 
+//import selenium
+const webdriver = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+const chromedriver = require('chromedriver');
+
 if (!isCookieIn) {
   fs.readFile(join(__dirname, 'cookies.json'), 'utf8', (err, data) => {
     if (err) {
       console.log(err);
     }
     //console.log data.cookies
-    let cookie = JSON.parse(data).cookies[0];
-  });
-  //openbrowser yemekepeti.com and set cookie
-  open('https://www.yemeksepeti.com/');
+    let xcook = JSON.parse(data).cookies[0];
 
-  isCookieIn = true;
+    isCookieIn = true;
+  });
 }
 const getSim = () => {
   // get https://5sim.net/v1/user/buy/activation/turkey/virtual4/yemeksepeti
@@ -69,9 +70,9 @@ const getSim = () => {
     });
 };
 
-setInterval(() => {
-  getSim();
-}, 100);
+// setInterval(() => {
+//   getSim();
+// }, 100);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
