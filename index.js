@@ -4,9 +4,13 @@ const bp = require('body-parser');
 const axios = require('axios');
 const PORT = 5004;
 const fs = require('fs');
+const open = require('open');
+
 const { join } = require('path');
+
 let counter = 0;
 let find = 0;
+let isCookieIn = false;
 require('dotenv').config();
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
@@ -27,6 +31,20 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+if (!isCookieIn) {
+  fs.readFile(join(__dirname, 'cookies.json'), 'utf8', (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    //console.log data.cookies
+    let cookie = JSON.parse(data).cookies[0];
+  });
+  //openbrowser yemekepeti.com and set cookie
+  open('https://www.yemeksepeti.com/');
+
+  isCookieIn = true;
+}
 const getSim = () => {
   // get https://5sim.net/v1/user/buy/activation/turkey/virtual4/yemeksepeti
   //token x
@@ -43,6 +61,7 @@ const getSim = () => {
       if (res.data !== 'no free phones') {
         find++;
         console.log(res.data.phone.substring(2));
+        //get cookies.json console.log
       }
     })
     .catch((err) => {

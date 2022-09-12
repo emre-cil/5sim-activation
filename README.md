@@ -1,9 +1,25 @@
 # 5sim activator
 
-##!important
+## !important
 
-.env file
+#### .env file
 
 ```
 API_KEY=
+```
+
+#### run
+
+```
+node index.js
+```
+
+### cookies.json
+
+```
+{
+    "cookies":[
+
+    ]
+}
 ```
