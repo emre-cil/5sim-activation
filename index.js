@@ -47,10 +47,10 @@ if (!isCookieIn) {
   });
 }
 const getSim = () => {
-  // get https://5sim.net/v1/user/buy/activation/turkey/virtual4/yemeksepeti
+  // get https://5sim.net/v1/user/buy/activation/tury/virtual4/appName
   //token x
   axios
-    .get('https://5sim.net/v1/user/buy/activation/turkey/virtual4/yemeksepeti', {
+    .get('https://5sim.net/v1/user/buy/activation/turkey/virtual4/appName', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.API_KEY}`,
